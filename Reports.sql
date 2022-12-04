@@ -23,6 +23,8 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
+insert into Employee (FirstName,LastName,UserId,EmployeeRole,DepartmentId,Salary) values('John','Green','John.G@abc.com','Manager',1,1000)
+
 CREATE TABLE [dbo].[Department](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](50) NULL,
@@ -33,6 +35,10 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+Insert into Department values('IT',0)
+Insert into Department values('HR',0)
+Insert into Department values('Marketing',0)
 
 CREATE TABLE [dbo].[Customer](
 	[Id] [int] NOT NULL,
@@ -46,6 +52,12 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+insert into Customer values(1,'James', 'Halpert',35)
+
+create or alter view viewEmployeeDepartment as 
+ select Employee.EmployeeId, Employee.FirstName,Employee.LastName,Employee.EmployeeRole,Department.Name as Department from Department
+ join Employee on Employee.DepartmentId=Department.Id
 
 
 create table Expenditure
@@ -65,7 +77,4 @@ create table Expenditure
  insert into Expenditure values('China', 2011, 5000)
  insert into Expenditure values('China', 2012, 5100)
  insert into Expenditure values('China', 2013, 2000)
-
-select * from Expenditure
-
 
