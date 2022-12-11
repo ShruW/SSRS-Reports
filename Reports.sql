@@ -59,6 +59,10 @@ create or alter view viewEmployeeDepartment as
  select Employee.EmployeeId, Employee.FirstName,Employee.LastName,Employee.EmployeeRole,Department.Name as Department from Department
  join Employee on Employee.DepartmentId=Department.Id
 
+create or alter procedure [dbo].[spGroupCustomerByAge]
+as
+select count(*) as 'Number of Customer', Age from Customer
+group by Age
 
 create table Expenditure
 (
